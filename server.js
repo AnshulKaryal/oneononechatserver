@@ -43,7 +43,7 @@ webapp.use(errorHandler);
 const port = process.env.PORT || 1000;
 const server = webapp.listen(
   port,
-  console.log(`The server started at port ${port}`.blue.bold)
+  console.log(`The server started at port ${port}`)
 );
 const io = new Server(server, {
   pingTimeout: 60000,

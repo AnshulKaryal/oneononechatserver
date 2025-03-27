@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import colors from "colors";
+import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
@@ -11,6 +11,15 @@ import path from "path";
 const webapp = express();
 dotenv.config();
 connectDB();
+
+// Enable CORS
+webapp.use(
+  cors({
+    origin: "*", // Change this to your frontend domain for better security
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 webapp.use(express.json());
 webapp.use("/api/user", userRoutes);

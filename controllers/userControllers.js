@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 import generateToken from "../config/generateToken.js";
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, photo } = req.body;
+  const { name, email, password } = req.body;
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please Enter All The Mandatory Fields");
@@ -17,14 +17,12 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    photo,
   });
   if (user) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      photo: user.photo,
       token: generateToken(user._id),
     });
   } else {
